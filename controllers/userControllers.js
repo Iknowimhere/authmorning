@@ -15,6 +15,14 @@ export const register = async (req, res, next) => {
             password,
             confirmPassword
         })
+
+        // let newUser=new User({
+        //     username,
+        //     email,
+        //     password,
+        //     confirmPassword
+        // })
+        // await newUser.save()
         //sending response
         res.status(201).json(newUser);
     }catch(err){
@@ -30,6 +38,12 @@ export const login = async (req, res, next) => {
         if(!existingUser){
             throw new Error("User doesnt exist,Please Register")
         }
+        //verify password
+        let result=await existingUser.verifyPassword(password,existingUser.password)
+        if(!result){
+            throw new Error("Password is not correct")
+        }
+        
         //sending response
         res.status(201).json(existingUser);
     }catch(err){
