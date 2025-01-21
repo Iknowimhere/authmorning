@@ -13,6 +13,7 @@ export const register = async (req, res, next) => {
         let newUser = await User.create({
             username,
             email,
+            role: req.body?.role || 'user',
             password,
             confirmPassword
         })
