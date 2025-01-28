@@ -1,9 +1,12 @@
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
 
+
 export const register = async (req, res, next) => {
     try{
     let { username, email, password, confirmPassword } = req.body;
+    console.log(req.file);
+    
         //verify user is in db already
         let existingUser=await User.findOne({email})
         if(existingUser){
@@ -15,13 +18,16 @@ export const register = async (req, res, next) => {
             email,
             role: req.body?.role || 'user',
             password,
-            confirmPassword
+            confirmPassword,
+            photo:req.file?.path
         })
         //generate token
         let token=await generateToken(newUser._id);
         //sending response
         res.status(201).json({newUser,token});
     }catch(err){
+        console.log(err);
+        
         next(err)
     }
 }

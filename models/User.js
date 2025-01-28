@@ -16,6 +16,10 @@ const userSchema=new Schema({
         enum:['user','admin'],
         default:'user'
     },
+    photo:{
+        type:String,
+        default:"https://static.vecteezy.com/system/resources/previews/030/504/836/non_2x/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg"
+    },
     password:{
         type:String,
         required:true

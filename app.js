@@ -7,6 +7,7 @@ db();
 let app=express();
 //middlewares
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 //base route
 app.use("/api/v1/user",userRoutes)
